@@ -29,6 +29,9 @@ font-family: 'Poppins', sans-serif;
     align-items: center;
 }
 
+#start-button {
+    background-color:rgb(255, 204, 0);
+}
 .quiz-section {
     justify-content: center;
     display: flex;
