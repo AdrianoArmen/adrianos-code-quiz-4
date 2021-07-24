@@ -149,3 +149,40 @@ function startTimer() {
         }
     }, 1000);
 }
+
+function displayAnswers() {
+    function findQuestion(obj) {
+        return obj.id === 1;
+    }
+
+    var question = questions.find(findQuestion)
+
+    questionTitles.textContent = question.question
+
+    let displayChoice = choices
+        .filter(function (obj) {
+            return obj.questionid === 1;
+        })
+        .map(function (obj) {
+            return obj
+        })
+
+    let length = displayChoice.length
+
+    for (i = 0; i < length; i++) {
+        var answerButton = document.createElement("input")
+        choicesSection.appendChild(answerButton)
+        answerButton.setAttribute("style", "margin: 10px;")
+        answerButton.setAttribute("type", "button")
+        answerButton.setAttribute("data-index", i)
+        answerButton.setAttribute("class", "button")
+
+        answerButton.value = i + 1 + ". " + displayChoice[i].answer
+    }
+
+    document.querySelectorAll('.button').forEach(item => {
+        item.addEventListener('click', event => {      
+          displayAnswers();
+        })
+      })
+}
