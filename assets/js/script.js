@@ -26,93 +26,94 @@ const choices = [
         id: "1",
         answer: "Netscape",
         questionid: 1,
-        correct:"true",
+        correct: "true",
     },
     {
         id: "2",
         answer: "JS Inc",
         questionid: 1,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "3",
         answer: "Facebook",
         questionid: 1,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "4",
         answer: "Not a Number",
         questionid: 2,
-        correct:"true",
+        correct: "true",
     },
     {
         id: "5",
         answer: "New Array Number",
         questionid: 2,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "6",
         answer: "Null Action Name",
         questionid: 2,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "7",
         answer: "Object-based",
         questionid: 3,
-        correct:"true",
+        correct: "true",
     },
     {
         id: "8",
         answer: "Markup",
         questionid: 3,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "9",
         answer: "Assembly",
         questionid: 3,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "10",
         answer: "Alerts",
         questionid: 4,
-        correct:"true",
+        correct: "true",
     },
     {
         id: "11",
         answer: "Strings",
         questionid: 4,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "12",
         answer: "Boolean",
         questionid: 4,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "13",
         answer: "Spin",
         questionid: 5,
-        correct:"true",
+        correct: "true",
     },
     {
         id: "14",
         answer: "For",
         questionid: 5,
-        correct:"false",
+        correct: "false",
     },
     {
         id: "15",
         answer: "While",
         questionid: 5,
-        correct:"false",
+        correct: "false",
     },
 ]
+let countDown = 60;
 
 let startSection = document.querySelector(".start-section");
 
@@ -120,7 +121,31 @@ let quizSection = document.querySelector(".quiz-section");
 document.querySelector("#start-button").addEventListener("click", function () {
     startSection.style.display = "none";
     quizSection.style.display = "block";
+    startQuiz();
+    displayAnswers();
 });
 
 
-let choicesSection=document.querySelector(".choices-section");
+let choicesSection = document.querySelector(".choices-section");
+
+let secondCounter = document.querySelector(".count-down");
+secondCounter.textContent = countDown
+
+let questionTitles = document.querySelector(".question-titles");
+
+function startQuiz() {
+    startTimer()
+}
+
+function startTimer() {
+    timer = setInterval(function () {
+        countDown--;
+        secondCounter.textContent = countDown;
+        if (countDown >= 0) {
+
+        }
+        if (countDown === 0) {
+
+        }
+    }, 1000);
+}
