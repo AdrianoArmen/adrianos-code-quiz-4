@@ -36,6 +36,7 @@ font-family: 'Poppins', sans-serif;
     justify-content: center;
     display: flex;
     flex-direction: column;
+    display: none;
 }
 
 .choices-section {
