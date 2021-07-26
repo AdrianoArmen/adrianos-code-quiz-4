@@ -126,6 +126,7 @@ var scoresSection = document.querySelector(".scores-section");
 
 var myChoice = document.createElement("p")
 var hr = document.createElement("hr")
+
 scoresSection.appendChild(hr)
 scoresSection.appendChild(myChoice)
 
@@ -346,7 +347,7 @@ function displayHighScores() {
     choicesSection.appendChild(clearHighScores)
 
     goBackListener()
-    highScoresListener()
+    clearHighScoresListener(highScore)
 }
 
 function addFormListener() {
@@ -365,11 +366,11 @@ function goBackListener() {
     })
 }
 
-function highScoresListener() {
+function clearHighScoresListener(highScore) {
     document.querySelectorAll('#clearhighscores').forEach(item => {
         item.addEventListener('click', event => {
             localStorage.clear();
-            clearScores(event);
+            clearScores(highScore);
         })
     })
 }
@@ -381,10 +382,16 @@ function handleFormSubmit(event, item) {
     displayHighScores()
 }
 
-function clearScores(event){
+function clearScores(highScore){
     if (highScore.children.length>0){
       while (highScore.firstChild) {
         highScore.removeChild(highScore.firstChild);
       }
     }
     }
+
+    document.querySelector(".view-hihgscores").addEventListener("click", function(){
+        startSection.style.display = "none"
+        quizSection.style.display = "block"
+        displayHighScores()
+      }); 
