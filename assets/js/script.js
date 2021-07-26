@@ -200,7 +200,11 @@ function startTimer() {
         countDown--;
         secondCounter.textContent = countDown;
         if (countDown >= 0) {
+            if (questionsCompleted && countDown > 0) {
 
+                clearInterval(timer);
+                displayFinalScore();
+            }
         }
         if (countDown === 0) {
             clearInterval(timer);
