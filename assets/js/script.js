@@ -126,7 +126,7 @@ var questionsCompleted = false;
 var score = 0;
 
 
-secondCounter.textContent ="CountDown:" + countDown
+secondCounter.textContent = "CountDown:" + countDown
 
 document.querySelector("#start-button").addEventListener("click", function () {
     startSection.style.display = "none";
@@ -136,36 +136,43 @@ document.querySelector("#start-button").addEventListener("click", function () {
 });
 
 
-function displayAnswerSection(){
-    clearAnswersSection();
-    if (questionNumber<questions.length){
-      questionNumber++
-      var question = questions.find(getQuestion)
-      var answers=getAnswers()
-      questionTitles.textContent = question.question
-      displayAnswers(answers)
-      addAnswerListener();
+function displayAnswerSection() {
+    clearAnswerSection();
+    if (questionNumber < questions.length) {
+        questionNumber++
+        var question = questions.find(getQuestion)
+        var answers = getAnswers()
+        questionTitles.textContent = question.question
+        displayAnswers(answers)
+        addAnswerListener();
     }
-    else{
-      questionsCompleted=true
-      displayFinalScore();
+    else {
+        questionsCompleted = true
+        displayFinalScore();
     }
-  }
+}
 
-  function displayAnswers(answers){
+function displayAnswers(answers) {
     var length = answers.length
     for (i = 0; i < length; i++) {
-      var answerButton = document.createElement("input")
-      choicesSection.appendChild(answerButton)
-      answerButton.setAttribute("class", "answer")
-      answerButton.setAttribute("style", "margin: 10px;")
-      answerButton.setAttribute("data-correct", answers[i].correct)
-      answerButton.setAttribute("type", "button")
-      answerButton.value = i+1+". "+answers[i].answer
+        var answerButton = document.createElement("input")
+        choicesSection.appendChild(answerButton)
+        answerButton.setAttribute("class", "answer")
+        answerButton.setAttribute("style", "margin: 10px;")
+        answerButton.setAttribute("data-correct", answers[i].correct)
+        answerButton.setAttribute("type", "button")
+        answerButton.value = i + 1 + ". " + answers[i].answer
     }
-  }
+}
 
-
+function addAnswerListener() {
+    document.querySelectorAll('.answer').forEach(item => {
+        item.addEventListener('click', event => {
+            checkAnswer(item);
+            displayAnswerSection();
+        })
+    })
+}
 
 
 function checkAnswer(e) {
@@ -174,16 +181,17 @@ function checkAnswer(e) {
     }
 }
 
-function clearAnswersSection() {
-    if (answersSection.children.length > 0) {
-        while (answersSection.firstChild) {
-            answersSection.removeChild(answersSection.firstChild);
+function clearAnswerSection() {
+    if (choicesSection.children.length > 0) {
+        while (choicesSection.firstChild) {
+            choicesSection.removeChild(choicesSection.firstChild);
         }
     }
 }
 
 
 function startQuiz() {
+    questionsCompleted=false;
     startTimer()
 }
 
@@ -202,11 +210,11 @@ function startTimer() {
 }
 
 
-function displayFinalScore(){
-    questionTitles.textContent="Quiz completed!"
-    clearAnswersSection();
+function displayFinalScore() {
+    questionTitles.textContent = "Quiz completed!"
+    clearAnswerSection();
     var finalScore = document.createElement("p")
-    answersSection.appendChild(finalScore)
-    finalScore.textContent="Your FinalScore is "
-    questionNumber=1;
-  }
+    choicesSection.appendChild(finalScore)
+    finalScore.textContent = "Your FinalScore is "
+    questionNumber = 1;
+}
