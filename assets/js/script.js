@@ -132,7 +132,7 @@ scoresSection.appendChild(myChoice)
 // Initial Values for Variables
 var questionsCompleted = false;
 var score = 0;
-var questionCounter =questions.length;
+var questionCounter = questions.length;
 
 
 secondCounter.textContent = "CountDown:" + countDown
@@ -148,7 +148,7 @@ document.querySelector("#start-button").addEventListener("click", function () {
 function displayAnswerSection() {
     clearAnswerSection();
     if (questionNumber <= questions.length) {
-        
+
         var question = questions.find(getQuestion)
         var answers = getAnswers()
         questionTitles.textContent = question.question
@@ -187,10 +187,10 @@ function addAnswerListener() {
 
 function checkAnswer(e) {
     scoresSection.setAttribute("style", "opacity: 1; visibility: visible; -webkit-transition: none; -moz-transition: none; -o-transition: none;")
-   
+
     if (e.getAttribute("data-correct") === "true") {
         myChoice.textContent = "CorrectAnswer!"
-        score++;    
+        score++;
     }
     else {
         countDown -= 10;
@@ -231,7 +231,7 @@ function startQuiz() {
 function startTimer() {
     timer = setInterval(function () {
         countDown--;
-        secondCounter.textContent = "CountDown:" +countDown;
+        secondCounter.textContent = "CountDown:" + countDown;
         if (countDown >= 0) {
             if (questionsCompleted && countDown > 0) {
 
@@ -252,8 +252,31 @@ function displayFinalScore() {
     questionTitles.textContent = "Quiz completed!"
     clearAnswerSection();
     var finalScore = document.createElement("p")
+
+    var submitScore = document.createElement("form");
+
+
+    submitScore.setAttribute('id', "submit-form");
+
+    var label = document.createElement("Label");
+    label.htmlFor = "score";
+    label.innerHTML = "Enter Initials:";
+    var initials = document.createElement("input");
+    initials.setAttribute('type', "text");
+    initials.setAttribute('name', "score");
+
+    var submit = document.createElement("input");
+    submit.setAttribute('type', "submit");
+    submit.setAttribute('value', "Submit");
+
+    submitScore.appendChild(label);
+    submitScore.appendChild(initials);
+    submitScore.appendChild(submit);
+
     choicesSection.appendChild(finalScore)
-    finalScore.textContent = "Your FinalScore is " +score+"/"+questionCounter
+    finalScore.textContent = "Your FinalScore is " + score + "/" + questionCounter
+    choicesSection.appendChild(finalScore)
+    addFormListener();
     questionNumber = 1;
 }
 
@@ -269,4 +292,34 @@ function getAnswers() {
             return obj
         })
     return displayChoice;
+}
+
+function displayHighScores(){
+    questionTitles.textContent="HighScores!"
+  clearAnswersSection();
+
+  var i = document.createElement("input"); 
+  i.setAttribute('type',"text");
+  i.setAttribute('name',"score");
+
+  submitScore.appendChild(label);
+  submitScore.appendChild(i);
+  submitScore.appendChild(s);
+
+  choicesSection.appendChild(finalScore)
+  finalScore.textContent="Your Score is: "+score+"/"+questionCounter
+  choicesSection.appendChild(submitScore)  
+}
+
+function addFormListener(){
+  document.querySelectorAll('form').forEach(item => {
+    item.addEventListener('submit', event => {  
+      handleFormSubmit();
+    })
+  })
+}
+
+function handleFormSubmit(event) {
+  
+  event.preventDefault();
 }
