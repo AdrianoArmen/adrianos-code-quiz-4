@@ -142,21 +142,28 @@ function displayAnswerSection(){
       questionNumber++
       var question = questions.find(getQuestion)
       var answers=getAnswers()
-      questionsHeading.textContent = question.question
-      createAnswers(answers)
-      addAnswersEventListeners();
+      questionTitles.textContent = question.question
+      displayAnswers(answers)
+      addAnswerListener();
     }
     else{
-      areAllAnswered=true
-      createfinalScore();
+      questionsCompleted=true
+      displayFinalScore();
     }
   }
 
-
-
-
-
-
+  function displayAnswers(answers){
+    var length = answers.length
+    for (i = 0; i < length; i++) {
+      var answerButton = document.createElement("input")
+      choicesSection.appendChild(answerButton)
+      answerButton.setAttribute("class", "answer")
+      answerButton.setAttribute("style", "margin: 10px;")
+      answerButton.setAttribute("data-correct", answers[i].correct)
+      answerButton.setAttribute("type", "button")
+      answerButton.value = i+1+". "+answers[i].answer
+    }
+  }
 
 
 
@@ -194,46 +201,6 @@ function startTimer() {
     }, 1000);
 }
 
-function displayAnswers() {
-    function findQuestion(obj) {
-        return obj.id === questionNumber;
-    }
-
-    var question = questions.find(findQuestion)
-
-    questionTitles.textContent = question.question
-
-    clearAnswersSection();
-
-    var displayChoice = choices
-        .filter(function (obj) {
-            return obj.questionid === questionNumber;
-        })
-        .map(function (obj) {
-            return obj
-        })
-
-    var length = displayChoice.length
-
-    for (i = 0; i < length; i++) {
-        var answerButton = document.createElement("input")
-        choicesSection.appendChild(answerButton)
-        answerButton.setAttribute("style", "margin: 10px;")
-        answerButton.setAttribute("type", "button")
-        answerButton.setAttribute("data-correct", displayChoice[i].correct)
-        answerButton.setAttribute("class", "button")
-
-        answerButton.value = i + 1 + ". " + displayChoice[i].answer
-    }
-
-    document.querySelectorAll('.button').forEach(item => {
-        item.addEventListener('click', event => {
-            displayAnswers();
-            checkAnswer();
-        })
-    })
-    questionNumber++;
-}
 
 function displayFinalScore(){
     questionTitles.textContent="Quiz completed!"
