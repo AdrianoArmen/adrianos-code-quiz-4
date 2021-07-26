@@ -137,13 +137,15 @@ var questionCounter = questions.length;
 
 secondCounter.textContent = "CountDown:" + countDown
 
-document.querySelector("#start-button").addEventListener("click", function () {
+function start() {
     startSection.style.display = "none";
     quizSection.style.display = "block";
     startQuiz();
     displayAnswerSection();
-});
-
+}
+document.querySelector("#start-button").addEventListener("click", function () {
+    start()
+})
 
 function displayAnswerSection() {
     clearAnswerSection();
@@ -321,24 +323,29 @@ function displayHighScores() {
     });
 
     var scorePosition = 1
+
     for (var i = 0; i < storageOrder.length; i++) {
         var parr = document.createElement("p");
         highScore.appendChild(parr)
-        parr.textContent = scorePosition + ". " + storageOrder[i][0] + " " + storageOrder[i][1]
+        parr.textContent = scorePosition + ". " + storageOrder[i][0] + "-" + storageOrder[i][1]
         scorePosition++
     }
 
     goBack.setAttribute('type', "button");
     goBack.setAttribute('name', "go-back");
+    goBack.setAttribute('id',"goback");
     goBack.textContent = "Go Back";
 
     clearHighScores.setAttribute('type', "button");
     clearHighScores.setAttribute('name', "clear-high-scores");
+    clearHighScores.setAttribute('id',"clearhighscores");
     clearHighScores.textContent = "Clear Highscores";
 
     choicesSection.appendChild(highScore)
     choicesSection.appendChild(goBack)
     choicesSection.appendChild(clearHighScores)
+
+    
 }
 
 function addFormListener() {
