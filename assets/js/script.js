@@ -114,7 +114,7 @@ const choices = [
     },
 ]
 
-// Declarating variables
+// Variable Declaration
 var countDown = 60;
 var questionNumber = 0;
 var startSection = document.querySelector(".start-section");
@@ -122,6 +122,13 @@ var quizSection = document.querySelector(".quiz-section");
 var choicesSection = document.querySelector(".choices-section");
 var secondCounter = document.querySelector(".count-down");
 var questionTitles = document.querySelector(".question-titles");
+var scoresSection = document.querySelector(".scores-section");
+
+var myChoice = document.createElement("p")
+var hr = document.createElement("hr")
+scoresSection.appendChild(hr)
+scoresSection.appendChild(myChoice)
+
 var questionsCompleted = false;
 var score = 0;
 
@@ -176,9 +183,29 @@ function addAnswerListener() {
 
 
 function checkAnswer(e) {
+    scoresSection.setAttribute("style", "opacity: 1; visibility: visible; -webkit-transition: none; -moz-transition: none; -o-transition: none;")
     if (e.getAttribute("data-correct") === "true") {
-        alert("correct answer")
+        myChoice.textContent = "CorrectAnswer!"
     }
+    else {
+        countDown -= 10;
+        myChoice.textContent = "WrongAnswer!"
+    }
+
+    var waitNext = 1;
+
+    wait = setInterval(function () {
+        waitNext--;
+        if (waitNext >= 0) {
+            scoresSection.setAttribute("style", "opacity: 0; visibility: hidden; -webkit-transition: visibility 3s linear, opacity 3s linear; -moz-transition: visibility 3s linear, opacity 2s linear; -o-transition: visibility 3s linear, opacity 3s linear;")
+        }
+
+        if (timerCount === 0) {
+
+            clearInterval(timer);
+        }
+
+    }, 0);
 }
 
 function clearAnswerSection() {
@@ -191,7 +218,7 @@ function clearAnswerSection() {
 
 
 function startQuiz() {
-    questionsCompleted=false;
+    questionsCompleted = false;
     startTimer()
 }
 
@@ -225,14 +252,14 @@ function displayFinalScore() {
 
 function getQuestion(obj) {
     return obj.id === questionNumber;
-  }
-  
-  function getAnswers(){
+}
+
+function getAnswers() {
     var displayChoice = choices.filter(function (obj) {
-      return obj.questionid === questionNumber;
+        return obj.questionid === questionNumber;
     })
-    .map(function (obj) {
-      return obj
-    })
+        .map(function (obj) {
+            return obj
+        })
     return displayChoice;
-  }
+}
