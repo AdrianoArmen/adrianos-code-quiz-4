@@ -134,24 +134,24 @@ let secondCounter = document.querySelector(".count-down");
 
 let questionTitles = document.querySelector(".question-titles");
 
-let score=0;
+let score = 0;
 
 secondCounter.textContent = countDown
 
-function checkAnswer(e){
-    if (e.getAttribute("data-correct")==="true"){
-      alert("correct answer")
+function checkAnswer(e) {
+    if (e.getAttribute("data-correct") === "true") {
+        alert("correct answer")
     }
-  }
-  
-  function clearAnswersSection(){
-  if (answersSection.children.length>0){
-    while (answersSection.firstChild) {
-      answersSection.removeChild(answersSection.firstChild);
+}
+
+function clearAnswersSection() {
+    if (answersSection.children.length > 0) {
+        while (answersSection.firstChild) {
+            answersSection.removeChild(answersSection.firstChild);
+        }
     }
-  }
-  }
-  
+}
+
 
 function startQuiz() {
     startTimer()
@@ -165,44 +165,48 @@ function startTimer() {
 
         }
         if (countDown === 0) {
-
+            clearInterval(timer);
+            finalScore();
         }
     }, 1000);
 }
 
 function displayAnswers() {
     function findQuestion(obj) {
-        return obj.id === 1;
+        return obj.id === questionNumber;
     }
 
     var question = questions.find(findQuestion)
 
     questionTitles.textContent = question.question
 
+    clearAnswersSection();
+
     let displayChoice = choices
         .filter(function (obj) {
-            return obj.questionid === 1;
+            return obj.questionid === questionNumber;
         })
         .map(function (obj) {
             return obj
         })
 
-    let length = displayChoice.length
+    var length = displayChoice.length
 
     for (i = 0; i < length; i++) {
         var answerButton = document.createElement("input")
         choicesSection.appendChild(answerButton)
         answerButton.setAttribute("style", "margin: 10px;")
         answerButton.setAttribute("type", "button")
-        answerButton.setAttribute("data-index", i)
+        answerButton.setAttribute("data-correct", displayChoice[i].correct)
         answerButton.setAttribute("class", "button")
 
         answerButton.value = i + 1 + ". " + displayChoice[i].answer
     }
 
     document.querySelectorAll('.button').forEach(item => {
-        item.addEventListener('click', event => {      
-          displayAnswers();
+        item.addEventListener('click', event => {
+            displayAnswers();
+            checkAnswer();
         })
-      })
+    })
 }
