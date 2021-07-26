@@ -113,12 +113,21 @@ const choices = [
         correct: "false",
     },
 ]
+
+// Declarating variables
 let countDown = 60;
 let questionNumber = 0;
-
 let startSection = document.querySelector(".start-section");
-
 let quizSection = document.querySelector(".quiz-section");
+let choicesSection = document.querySelector(".choices-section");
+let secondCounter = document.querySelector(".count-down");
+let questionTitles = document.querySelector(".question-titles");
+let questionsCompleted = false;
+let score = 0;
+
+
+secondCounter.textContent ="CountDown:" + countDown
+
 document.querySelector("#start-button").addEventListener("click", function () {
     startSection.style.display = "none";
     quizSection.style.display = "block";
@@ -127,16 +136,16 @@ document.querySelector("#start-button").addEventListener("click", function () {
 });
 
 
-let choicesSection = document.querySelector(".choices-section");
-
-let secondCounter = document.querySelector(".count-down");
 
 
-let questionTitles = document.querySelector(".question-titles");
 
-let score = 0;
 
-secondCounter.textContent = countDown
+
+
+
+
+
+
 
 function checkAnswer(e) {
     if (e.getAttribute("data-correct") === "true") {
