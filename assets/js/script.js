@@ -219,6 +219,20 @@ function displayFinalScore() {
     clearAnswerSection();
     var finalScore = document.createElement("p")
     choicesSection.appendChild(finalScore)
-    finalScore.textContent = "Your FinalScore is "
+    finalScore.textContent = "Your FinalScore is " + countDown
     questionNumber = 1;
 }
+
+function getQuestion(obj) {
+    return obj.id === questionNumber;
+  }
+  
+  function getAnswers(){
+    var displayChoice = choices.filter(function (obj) {
+      return obj.questionid === questionNumber;
+    })
+    .map(function (obj) {
+      return obj
+    })
+    return displayChoice;
+  }
