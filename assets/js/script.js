@@ -1,4 +1,4 @@
-// questions will be displayed on array object
+// Question and Answer Choices Array
 const questions = [
     {
         id: 1,
@@ -116,7 +116,7 @@ const choices = [
 
 // Variable Declaration
 var countDown = 60;
-var questionNumber = 0;
+var questionNumber = 1;
 var startSection = document.querySelector(".start-section");
 var quizSection = document.querySelector(".quiz-section");
 var choicesSection = document.querySelector(".choices-section");
@@ -129,8 +129,10 @@ var hr = document.createElement("hr")
 scoresSection.appendChild(hr)
 scoresSection.appendChild(myChoice)
 
+// Initial Values for Variables
 var questionsCompleted = false;
 var score = 0;
+var questionCounter =questions.length;
 
 
 secondCounter.textContent = "CountDown:" + countDown
@@ -145,13 +147,14 @@ document.querySelector("#start-button").addEventListener("click", function () {
 
 function displayAnswerSection() {
     clearAnswerSection();
-    if (questionNumber < questions.length) {
-        questionNumber++
+    if (questionNumber <= questions.length) {
+        
         var question = questions.find(getQuestion)
         var answers = getAnswers()
         questionTitles.textContent = question.question
         displayAnswers(answers)
         addAnswerListener();
+        questionNumber++
     }
     else {
         questionsCompleted = true
@@ -184,8 +187,10 @@ function addAnswerListener() {
 
 function checkAnswer(e) {
     scoresSection.setAttribute("style", "opacity: 1; visibility: visible; -webkit-transition: none; -moz-transition: none; -o-transition: none;")
+   
     if (e.getAttribute("data-correct") === "true") {
         myChoice.textContent = "CorrectAnswer!"
+        score++;    
     }
     else {
         countDown -= 10;
@@ -196,6 +201,7 @@ function checkAnswer(e) {
 
     wait = setInterval(function () {
         waitNext--;
+
         if (waitNext >= 0) {
             scoresSection.setAttribute("style", "opacity: 0; visibility: hidden; -webkit-transition: visibility 3s linear, opacity 3s linear; -moz-transition: visibility 3s linear, opacity 2s linear; -o-transition: visibility 3s linear, opacity 3s linear;")
         }
@@ -225,7 +231,7 @@ function startQuiz() {
 function startTimer() {
     timer = setInterval(function () {
         countDown--;
-        secondCounter.textContent = countDown;
+        secondCounter.textContent = "CountDown:" +countDown;
         if (countDown >= 0) {
             if (questionsCompleted && countDown > 0) {
 
@@ -234,6 +240,7 @@ function startTimer() {
             }
         }
         if (countDown === 0) {
+
             clearInterval(timer);
             displayFinalScore();
         }
@@ -246,7 +253,7 @@ function displayFinalScore() {
     clearAnswerSection();
     var finalScore = document.createElement("p")
     choicesSection.appendChild(finalScore)
-    finalScore.textContent = "Your FinalScore is " + countDown
+    finalScore.textContent = "Your FinalScore is " +score+"/"+questionCounter
     questionNumber = 1;
 }
 
