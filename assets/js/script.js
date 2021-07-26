@@ -166,7 +166,7 @@ function startTimer() {
         }
         if (countDown === 0) {
             clearInterval(timer);
-            finalScore();
+            displayFinalScore();
         }
     }, 1000);
 }
@@ -209,4 +209,14 @@ function displayAnswers() {
             checkAnswer();
         })
     })
+    questionNumber++;
 }
+
+function displayFinalScore(){
+    questionTitles.textContent="Quiz completed!"
+    clearAnswersSection();
+    var finalScore = document.createElement("p")
+    answersSection.appendChild(finalScore)
+    finalScore.textContent="Your FinalScore is "
+    questionNumber=1;
+  }
