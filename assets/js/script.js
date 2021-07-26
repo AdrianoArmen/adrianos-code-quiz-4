@@ -114,6 +114,7 @@ const choices = [
     },
 ]
 let countDown = 60;
+let questionNumber = 0;
 
 let startSection = document.querySelector(".start-section");
 
@@ -129,9 +130,28 @@ document.querySelector("#start-button").addEventListener("click", function () {
 let choicesSection = document.querySelector(".choices-section");
 
 let secondCounter = document.querySelector(".count-down");
-secondCounter.textContent = countDown
+
 
 let questionTitles = document.querySelector(".question-titles");
+
+let score=0;
+
+secondCounter.textContent = countDown
+
+function checkAnswer(e){
+    if (e.getAttribute("data-correct")==="true"){
+      alert("correct answer")
+    }
+  }
+  
+  function clearAnswersSection(){
+  if (answersSection.children.length>0){
+    while (answersSection.firstChild) {
+      answersSection.removeChild(answersSection.firstChild);
+    }
+  }
+  }
+  
 
 function startQuiz() {
     startTimer()
