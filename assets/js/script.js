@@ -263,7 +263,7 @@ function displayFinalScore() {
     label.innerHTML = "Enter Initials:";
     var initials = document.createElement("input");
     initials.setAttribute('type', "text");
-    initials.setAttribute('name', "score");
+    initials.setAttribute('name', "initials");
 
     var submit = document.createElement("input");
     submit.setAttribute('type', "submit");
@@ -294,32 +294,64 @@ function getAnswers() {
     return displayChoice;
 }
 
-function displayHighScores(){
-    questionTitles.textContent="HighScores!"
-  clearAnswersSection();
+function displayHighScores() {
+    questionTitles.textContent = "HighScores!"
+    clearAnswersSection();
 
-  var i = document.createElement("input"); 
-  i.setAttribute('type',"text");
-  i.setAttribute('name',"score");
+    var highScore = document.createElement("div");
+    var goBack = document.createElement("button");
+    var clearHighScores = document.createElement("button");
+    highScore.setAttribute('id', "high-scores");
 
-  submitScore.appendChild(label);
-  submitScore.appendChild(i);
-  submitScore.appendChild(s);
+    var keysArray = Object.keys(localStorage);
+    var valuesArray = Object.values(localStorage);
 
-  choicesSection.appendChild(finalScore)
-  finalScore.textContent="Your Score is: "+score+"/"+questionCounter
-  choicesSection.appendChild(submitScore)  
+    var localstorage = {};
+    for (var i = 0; i < localStorage.length; i++) {
+        localstorage[keysArray[i]] = valuesArray[i]
+    }
+
+    var storageOrder = [];
+    for (var item in localstorage) {
+        storageOrder.push([item, localstorage[item]]);
+    }
+
+    storageOrder.sort(function (a, b) {
+        return b[1] - a[1];
+    });
+
+    var scorePosition = 1
+    for (var i = 0; i < storageOrder.length; i++) {
+        var parr = document.createElement("p");
+        highScore.appendChild(parr)
+        parr.textContent = scorePosition + ". " + storageOrder[i][0] + " " + storageOrder[i][1]
+        scorePosition++
+    }
+
+    goBack.setAttribute('type', "button");
+    goBack.setAttribute('name', "go-back");
+    goBack.textContent = "Go Back";
+
+    clearHighScores.setAttribute('type', "button");
+    clearHighScores.setAttribute('name', "clear-high-scores");
+    clearHighScores.textContent = "Clear Highscores";
+
+    choicesSection.appendChild(highScore)
+    choicesSection.appendChild(goBack)
+    choicesSection.appendChild(clearHighScores)
 }
 
-function addFormListener(){
-  document.querySelectorAll('form').forEach(item => {
-    item.addEventListener('submit', event => {  
-      handleFormSubmit();
+function addFormListener() {
+    document.querySelectorAll('#submit-form').forEach(item => {
+        item.addEventListener('submit', event => {
+            handleFormSubmit(event, item);
+        })
     })
-  })
 }
 
-function handleFormSubmit(event) {
-  
-  event.preventDefault();
+function handleFormSubmit(event, item) {
+
+    event.preventDefault();
+    localStorage.setItem(item.initials.value, score);
+    createHighScores()
 }
