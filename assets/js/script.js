@@ -333,19 +333,20 @@ function displayHighScores() {
 
     goBack.setAttribute('type', "button");
     goBack.setAttribute('name', "go-back");
-    goBack.setAttribute('id',"goback");
+    goBack.setAttribute('id', "goback");
     goBack.textContent = "Go Back";
 
     clearHighScores.setAttribute('type', "button");
     clearHighScores.setAttribute('name', "clear-high-scores");
-    clearHighScores.setAttribute('id',"clearhighscores");
+    clearHighScores.setAttribute('id', "clearhighscores");
     clearHighScores.textContent = "Clear Highscores";
 
     choicesSection.appendChild(highScore)
     choicesSection.appendChild(goBack)
     choicesSection.appendChild(clearHighScores)
 
-    
+    goBackListener()
+    highScoresListener()
 }
 
 function addFormListener() {
@@ -356,9 +357,34 @@ function addFormListener() {
     })
 }
 
+function goBackListener() {
+    document.querySelectorAll('#goback').forEach(item => {
+        item.addEventListener('click', event => {
+            location.reload();
+        })
+    })
+}
+
+function highScoresListener() {
+    document.querySelectorAll('#clearhighscores').forEach(item => {
+        item.addEventListener('click', event => {
+            localStorage.clear();
+            clearScores(event);
+        })
+    })
+}
+
 function handleFormSubmit(event, item) {
 
     event.preventDefault();
     localStorage.setItem(item.initials.value, score);
-    createHighScores()
+    displayHighScores()
 }
+
+function clearScores(event){
+    if (highScore.children.length>0){
+      while (highScore.firstChild) {
+        highScore.removeChild(highScore.firstChild);
+      }
+    }
+    }
