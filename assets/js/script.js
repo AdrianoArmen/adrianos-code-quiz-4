@@ -115,15 +115,15 @@ const choices = [
 ]
 
 // Declarating variables
-let countDown = 60;
-let questionNumber = 0;
-let startSection = document.querySelector(".start-section");
-let quizSection = document.querySelector(".quiz-section");
-let choicesSection = document.querySelector(".choices-section");
-let secondCounter = document.querySelector(".count-down");
-let questionTitles = document.querySelector(".question-titles");
-let questionsCompleted = false;
-let score = 0;
+var countDown = 60;
+var questionNumber = 0;
+var startSection = document.querySelector(".start-section");
+var quizSection = document.querySelector(".quiz-section");
+var choicesSection = document.querySelector(".choices-section");
+var secondCounter = document.querySelector(".count-down");
+var questionTitles = document.querySelector(".question-titles");
+var questionsCompleted = false;
+var score = 0;
 
 
 secondCounter.textContent ="CountDown:" + countDown
@@ -132,11 +132,25 @@ document.querySelector("#start-button").addEventListener("click", function () {
     startSection.style.display = "none";
     quizSection.style.display = "block";
     startQuiz();
-    displayAnswers();
+    displayAnswerSection();
 });
 
 
-
+function displayAnswerSection(){
+    clearAnswersSection();
+    if (questionNumber<questions.length){
+      questionNumber++
+      var question = questions.find(getQuestion)
+      var answers=getAnswers()
+      questionsHeading.textContent = question.question
+      createAnswers(answers)
+      addAnswersEventListeners();
+    }
+    else{
+      areAllAnswered=true
+      createfinalScore();
+    }
+  }
 
 
 
@@ -191,7 +205,7 @@ function displayAnswers() {
 
     clearAnswersSection();
 
-    let displayChoice = choices
+    var displayChoice = choices
         .filter(function (obj) {
             return obj.questionid === questionNumber;
         })
