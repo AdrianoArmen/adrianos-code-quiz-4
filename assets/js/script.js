@@ -41,6 +41,8 @@ const questions = [
         question: "How do you add a comment in a JavaScript?",
     },
 ]
+
+// answer array with 3 choices per each question - linked by questionid
 const choices = [
     {
         id: "1",
@@ -248,6 +250,7 @@ var questionCounter = questions.length;
 
 secondCounter.textContent = "CountDown:" + countDown
 
+
 function start() {
     startSection.style.display = "none";
     quizSection.style.display = "block";
@@ -258,6 +261,7 @@ document.querySelector("#start-button").addEventListener("click", function () {
     start()
 })
 
+// display questions and multiple choice functionality
 function displayAnswerSection() {
     clearAnswersSection();
     if (questionNumber <= questions.length) {
@@ -298,7 +302,7 @@ function addAnswerListener() {
     })
 }
 
-
+// conditional for right and wrong choices - penalty to timer
 function checkAnswer(e) {
     scoresSection.setAttribute("style", "opacity: 1; visibility: visible; -webkit-transition: none; -moz-transition: none; -o-transition: none;")
 
@@ -311,6 +315,7 @@ function checkAnswer(e) {
         myChoice.textContent = "WrongAnswer!"
     }
 
+    // smooth transitions for choices notifications
     var waitNext = 1;
 
     wait = setInterval(function () {
@@ -343,6 +348,7 @@ function startQuiz() {
     startTimer()
 }
 
+// count down functionality and conditionals to finish the game and display scores
 function startTimer() {
     timer = setInterval(function () {
         countDown--;
@@ -363,6 +369,7 @@ function startTimer() {
 }
 
 
+// display scores and intials form functionality
 function displayFinalScore() {
     questionTitles.textContent = "Quiz completed!"
     clearAnswersSection();
@@ -396,6 +403,7 @@ function displayFinalScore() {
     questionNumber = 1;
 }
 
+// retrieve corresponding question and choices by questionid
 function getQuestion(obj) {
     return obj.id === questionNumber;
 }
@@ -410,6 +418,7 @@ function getAnswers() {
     return displayChoice;
 }
 
+// highscores section saved in local storage - ordered by highest score
 function displayHighScores() {
     questionTitles.textContent = "HighScores!"
     clearAnswersSection();
@@ -465,6 +474,8 @@ function displayHighScores() {
     clearHighScoresListener(highScore)
 }
 
+
+// event listeners for buttons and form
 function addFormListener() {
     document.querySelectorAll('#submit-form').forEach(item => {
         item.addEventListener('submit', event => {
