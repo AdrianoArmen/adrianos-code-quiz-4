@@ -149,7 +149,7 @@ document.querySelector("#start-button").addEventListener("click", function () {
 })
 
 function displayAnswerSection() {
-    clearAnswerSection();
+    clearAnswersSection();
     if (questionNumber <= questions.length) {
 
         var question = questions.find(getQuestion)
@@ -174,6 +174,7 @@ function displayAnswers(answers) {
         answerButton.setAttribute("style", "margin: 10px;")
         answerButton.setAttribute("data-correct", answers[i].correct)
         answerButton.setAttribute("type", "button")
+        answerButton.setAttribute("style", "margin: 5px; padding: 5px; background-color: rgb(255, 204, 0); width: 75%;")
         answerButton.value = i + 1 + ". " + answers[i].answer
     }
 }
@@ -217,7 +218,8 @@ function checkAnswer(e) {
     }, 0);
 }
 
-function clearAnswerSection() {
+
+function clearAnswersSection() {
     if (choicesSection.children.length > 0) {
         while (choicesSection.firstChild) {
             choicesSection.removeChild(choicesSection.firstChild);
@@ -253,7 +255,7 @@ function startTimer() {
 
 function displayFinalScore() {
     questionTitles.textContent = "Quiz completed!"
-    clearAnswerSection();
+    clearAnswersSection();
     var finalScore = document.createElement("p")
 
     var submitScore = document.createElement("form");
@@ -271,14 +273,15 @@ function displayFinalScore() {
     var submit = document.createElement("input");
     submit.setAttribute('type', "submit");
     submit.setAttribute('value', "Submit");
+    submit.setAttribute("style", "margin: 5px; padding: 10px; background-color: rgb(255, 204, 0);")
 
     submitScore.appendChild(label);
     submitScore.appendChild(initials);
     submitScore.appendChild(submit);
 
     choicesSection.appendChild(finalScore)
-    finalScore.textContent = "Your FinalScore is " + score + "/" + questionCounter
-    choicesSection.appendChild(finalScore)
+    finalScore.textContent = "Your FinalScore is " +score+ "/" + questionCounter
+    choicesSection.appendChild(submitScore)
     addFormListener();
     questionNumber = 1;
 }
@@ -303,8 +306,10 @@ function displayHighScores() {
 
     var highScore = document.createElement("div");
     var goBack = document.createElement("button");
+    goBack.setAttribute("style", "margin: 5px; padding: 10px; background-color: rgb(255, 204, 0);")
     var clearHighScores = document.createElement("button");
     highScore.setAttribute('id', "high-scores");
+    clearHighScores.setAttribute("style", "margin: 5px; padding: 10px; background-color: rgb(255, 204, 0);")
 
     var keysArray = Object.keys(localStorage);
     var valuesArray = Object.values(localStorage);
@@ -382,16 +387,16 @@ function handleFormSubmit(event, item) {
     displayHighScores()
 }
 
-function clearScores(highScore){
-    if (highScore.children.length>0){
-      while (highScore.firstChild) {
-        highScore.removeChild(highScore.firstChild);
-      }
+function clearScores(highScore) {
+    if (highScore.children.length > 0) {
+        while (highScore.firstChild) {
+            highScore.removeChild(highScore.firstChild);
+        }
     }
-    }
+}
 
-    document.querySelector(".view-hihgscores").addEventListener("click", function(){
-        startSection.style.display = "none"
-        quizSection.style.display = "block"
-        displayHighScores()
-      }); 
+document.querySelector(".view-hihgscores").addEventListener("click", function () {
+    startSection.style.display = "none"
+    quizSection.style.display = "block"
+    displayHighScores()
+});

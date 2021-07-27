@@ -16,6 +16,11 @@ min-height: 100%;
 font-family: 'Poppins', sans-serif;
 }
 
+p {
+    padding: 5px;
+    margin: 5px;
+}
+
 .header {
     margin: 15px;
     justify-content: space-between;
@@ -33,6 +38,8 @@ font-family: 'Poppins', sans-serif;
 
 #start-button, #highscore-button {
     background-color:rgb(255, 204, 0);
+    width: 20%;
+    padding:10px 30px ;
 }
 
 
