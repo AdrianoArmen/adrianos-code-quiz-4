@@ -20,6 +20,26 @@ const questions = [
         id: 5,
         question: "Wich of this options is not a valid looping structure?",
     },
+    {
+        id: 6,
+        question: "Which of these are valid JavaScript data type?",
+    },
+    {
+        id: 7,
+        question: "Which one of the following is an ternary operator?",
+    },
+    {
+        id: 8,
+        question: "What is the first index of an array?",
+    },
+    {
+        id: 9,
+        question: "When was JavaScript created?",
+    },
+    {
+        id: 10,
+        question: "How do you add a comment in a JavaScript?",
+    },
 ]
 const choices = [
     {
@@ -111,6 +131,96 @@ const choices = [
         answer: "While",
         questionid: 5,
         correct: "false",
+    },
+    {
+        id: "16",
+        answer: "Boolean",
+        questionid: 6,
+        correct: "false",
+    },
+    {
+        id: "17",
+        answer: "String",
+        questionid: 6,
+        correct: "false",
+    },
+    {
+        id: "18",
+        answer: "Both",
+        questionid: 6,
+        correct: "true",
+    },
+    {
+        id: "19",
+        answer: "!=",
+        questionid: 7,
+        correct: "false",
+    },
+    {
+        id: "20",
+        answer: "?",
+        questionid: 7,
+        correct: "true",
+    },
+    {
+        id: "21",
+        answer: "==",
+        questionid: 7,
+        correct: "false",
+    },
+    {
+        id: "22",
+        answer: "1",
+        questionid: 8,
+        correct: "false",
+    },
+    {
+        id: "23",
+        answer: "first",
+        questionid: 8,
+        correct: "false",
+    },
+    {
+        id: "24",
+        answer: "0",
+        questionid: 8,
+        correct: "true",
+    },
+    {
+        id: "25",
+        answer: "September 1995",
+        questionid: 9,
+        correct: "true",
+    },
+    {
+        id: "26",
+        answer: "Early 2000s",
+        questionid: 9,
+        correct: "false",
+    },
+    {
+        id: "27",
+        answer: "1989",
+        questionid: 9,
+        correct: "false",
+    },
+    {
+        id: "28",
+        answer: "<!--text-->",
+        questionid: 10,
+        correct: "false",
+    },
+    {
+        id: "29",
+        answer: "!!text",
+        questionid: 10,
+        correct: "false",
+    },
+    {
+        id: "30",
+        answer: "//text",
+        questionid: 10,
+        correct: "true",
     },
 ]
 
