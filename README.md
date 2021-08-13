@@ -1,4 +1,6 @@
 # adrianos-code-quiz-4
+![GitHub license](https://img.shields.io/badge/license-MIT-green.svg)
+
 Homework 4 - Code Quiz
 
 ## HOMEWORK LINKS
@@ -23,4 +25,13 @@ This sample app was designed to showcase my JavaScript knowledge by runing a sim
 The following animation demonstrates the actual application functionality:
 
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](./assets/img/appfunctionality.gif)
+
+## License 📄
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+---
+
+© 2021 Adriano.
+
 
